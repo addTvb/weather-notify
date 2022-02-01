@@ -1,0 +1,31 @@
+.weatherCard {
+	background-color: var(--milky-white);
+	border: 1px solid var(--light-gray);
+	border-radius: 1rem;
+	margin-top: 1rem;
+	padding: 1rem;
+}
+
+.cardHeader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 0.5rem;
+}
+.cardTitle {
+	display: flex;
+	column-gap: 0.5rem;
+}
+.divider {
+	width: 100%;
+	height: 1px;
+	background-color: var(--light-gray);
+	margin: 1rem 0;
+}
+.cardBottom {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 0.3rem;
+}
