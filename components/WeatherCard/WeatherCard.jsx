@@ -1,62 +1,61 @@
 import Image from "next/image";
 import { useEffect } from "react";
 
-import { useWeather } from "../../hooks/queries/useWeather";
+import { Placeholder } from "@/components";
+import { useWeather } from "@/hooks/queries/useWeather";
+import { getWeatherImage } from "@/utils/getWeatherImage";
+import { convertToDate } from "@/utils/convertToDate";
+import { checkRain } from "@/utils/checkRain";
 
-import sun from "/public/sun.svg";
 import styles from "./WeatherCard.module.css";
 
 export const WeatherCard = () => {
-	const { data: weather } = useWeather();
+	const { data: weather, isLoading } = useWeather();
 
-	const convertToDate = (unixDate) => {
-		const milliseconds = unixDate * 1000; // 1575909015000
-		const dateObject = new Date(milliseconds);
-
-		return dateObject.toLocaleString("ru"); //2019-12-9 10:30:15}
-	};
-
-	const checkRain = (dailyWeather) => {
-		return dailyWeather?.find((day) => {
-			if (day?.weather[0].main === "Rain") {
-				console.log(convertToDate(day?.dt));
-				return day;
-			}
-		});
-	};
-
-	const convertToCelsius = (fahrenheit) => {
-		return (fahrenheit - 32) / 1.8;
-	};
-
-	useEffect(() => {
-		// console.log(
-		// 	weather?.daily?.forEach((day) => {
-		// 		if (day?.weather[0].main === "Rain") {
-		// 			console.log("gggg", day);
-		// 			return day;
-		// 		}
-		// 		console.log("dddd", day);
-		// 		return day;
-		// 	})
-		// );
-	}, [weather]);
+	if (isLoading) {
+		return (
+			<div className={styles.weatherCard}>
+				<div className={styles.cardHeader}>
+					<Placeholder
+						width="60px"
+						height="60px"
+						borderRadius="1rem"
+					/>
+					<div className={styles.cardTitle}>
+						<Placeholder width="80px" height="20px" />
+						<Placeholder width="40px" height="20px" />
+					</div>
+				</div>
+				<div className={styles.divider}></div>
+				<div className={styles.cardBottom}>
+					Upcoming precipitation:
+					<b>
+						<Placeholder width="90px" height="15px" />
+					</b>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<>
 			<div className={styles.weatherCard}>
 				<div className={styles.cardHeader}>
-					<Image src={sun} width={50} height={50} />
+					<Image
+						src={getWeatherImage(weather?.current.weather[0].main)}
+						width={60}
+						height={60}
+					/>
 					<div className={styles.cardTitle}>
-						<span>{weather?.current.weather[0].main}</span>
-						<span>
-							{weather && Math.round(weather?.current.temp)}
-						</span>
+						<h2>{weather?.current.weather[0].main}</h2>
+						<h2>
+							{weather && Math.round(weather?.current.temp)} °C
+						</h2>
 					</div>
 				</div>
 				<div className={styles.divider}></div>
 				<div className={styles.cardBottom}>
-					Ближайшие осадки:
+					Upcoming precipitation:
 					<b>
 						{weather &&
 							convertToDate(checkRain(weather?.daily)?.dt)}

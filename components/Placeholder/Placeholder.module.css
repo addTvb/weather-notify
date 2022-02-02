@@ -1,0 +1,21 @@
+@keyframes bgShimmer {
+	0% {
+		background-position: -80vw 0;
+	}
+	100% {
+		background-position: 80vw 0;
+	}
+}
+
+.placeholder {
+	display: block;
+
+	background: linear-gradient(to right, #e9e9e9 4%, #d9d9d9 25%, #e9e9e9 36%);
+
+	background-size: 80vw 100%;
+	border-radius: 4px;
+	position: relative;
+	z-index: 2;
+
+	animation: bgShimmer 3.5s infinite linear;
+}
