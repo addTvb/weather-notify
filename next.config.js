@@ -11,3 +11,9 @@ module.exports = withPWA({
 		skipWaiting: true,
 	},
 });
+
+module.exports = {
+	env: {
+		API_KEY: "6acf1eeb5996979d905cfae66423b6a0",
+	},
+};

@@ -21,7 +21,6 @@ export const useWeather = () => {
 			console.log("Geolocation is not supported by this browser");
 		}
 	}, []);
-
 	return useQuery(
 		["current-weather"],
 		async () => {
