@@ -7,7 +7,7 @@ import wind from "@/public/weathers/wind.svg";
 
 export const getWeatherImage = (weatherType) => {
 	switch (weatherType) {
-		case "Cloudy":
+		case "Clouds":
 			return cloudy;
 		case "Fog":
 			return fog;
